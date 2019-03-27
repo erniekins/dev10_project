@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>Lucky Sevens</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>	
+	<script type="text/javascript">
+		function playGame() {
+			 var initial = parseInt(document.getElementById("bet").value);
+			 console.log(initial);
+			 if (initial > 0) {
+			 	console.log("You made it to the bet", initial);
+				function rollDice() {
+				 	return Math.floor(Math.random() * 6) + 1;
+				};
+				var bet = initial;
+				var highest = initial;
+				var count = 0;
+				var highCount = initial
+				console.log(bet, "the bet");
+				while (bet > 0) {
+					var diceTotal = rollDice() + rollDice();
+					console.log(diceTotal, "dice roll")
+					if (diceTotal == 7){
+						bet += 4;
+						console.log(bet, "you won!");
+						if(bet > highest) {
+							highest = bet;
+							highCount = count + 1;
+						}
+						count++;
+					}
+					else {
+						bet -= 1;
+						console.log(bet, "you lost");
+						count++;
+					}
+				};
+			document.getElementById("result").style.display = "block";
+			document.getElementById("initial").innerText = initial;
+			document.getElementById("totalRolls").innerText = count;
+			document.getElementById("highWin").innerText = highest;
+			document.getElementById("rollCountAtHigh").innerText = highCount;
+			 }
+			 else {
+			 	document.getElementById("error").style.display = "block";
+			 }
+		}
+
+	</script>
+
+	<h1>Lucky Sevens</h1>
+
+	<form>
+		<h3>Starting Bet: <input type="number" placeholder="$0.00" id="bet" min="0" max="any"></h3>
+	</form>
+
+	<button onclick="playGame();" type="submit">Play!</button>
+
+	<div id="error" style="display: none; color: red;">
+		<br>
+		<br>
+		<h1>"Please enter a number greater than 0"</h1>
+	</div>
+
+	<div id="result" style="display: none">
+		<table class="table table-striped">
+		<br>
+		<br>
+		<br>
+	    <tbody>
+	      <tr>
+	        <td>Starting Bet</td>
+	        <td>$ <span id="initial"></span></td>
+	      </tr>
+	      <tr>
+	        <td>Total Rolls Before Going Broke</td>
+	        <td><span id="totalRolls"></span></td>
+	      </tr>
+	      <tr>
+	        <td>Highest Amount Won</td>
+	        <td>$ <span id="highWin"></span></td>
+	      </tr>
+	      	      <tr>
+	        <td>Roll Count at Highest Amount Won</td>
+	        <td><span id="rollCountAtHigh"></span></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
